@@ -39,6 +39,7 @@
         "-DskipUnitTests=true" to your maven command such as "mvn install -DskipUnitTests=true"
         -->
         <skipUnitTests>false</skipUnitTests>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
         <dependency>

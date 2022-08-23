@@ -67,7 +67,7 @@ public class DirectMethodSample
         {
             // Manage complete Method
             // ================================ invoke method on device ===============================
-            invokeMethod(methodClient);
+            //invokeMethod(methodClient);
 
             // ================================= schedule invoke method ===============================
             scheduleInvokeMethod(methodClient, jobClient);
@@ -125,10 +125,18 @@ public class DirectMethodSample
         ScheduledJob job = jobClient.scheduleDirectMethod(jobId, queryCondition, methodName, invokeDateInFuture, options);
 
         System.out.println("Wait for job completed...");
+        boolean warningReported = false;
         while (job.getJobStatus() != ScheduledJobStatus.completed)
         {
             Thread.sleep(GIVE_100_MILLISECONDS_TO_IOTHUB);
             job = jobClient.get(jobId);
+
+            if (job.getMaxExecutionTimeInSeconds() != MAX_EXECUTION_TIME_IN_SECONDS
+                && !warningReported)
+            {
+                System.out.println(String.format("Warning: The MaxExecutionTimeInSeconds setting was not correctly set. Expected: %s. Received: %s.", MAX_EXECUTION_TIME_IN_SECONDS, job.getMaxExecutionTimeInSeconds()));
+                warningReported = true;
+            }
         }
         System.out.println("job completed");
     }
