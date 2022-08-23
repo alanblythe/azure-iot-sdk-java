@@ -258,10 +258,7 @@ public class QueryClientTests extends IntegrationTest
 
             assertNotNull(job.getJobId());
             assertNotNull(job.getJobType());
-            assertNotNull(job.getStartTime());
-            assertNotNull(job.getEndTime());
             assertNotNull(job.getCreatedTime());
-            assertNotNull(job.getMaxExecutionTimeInSeconds());
             assertNotNull(job.getJobStatus());
             assertNotNull(job.getJobStatistics());
         }
